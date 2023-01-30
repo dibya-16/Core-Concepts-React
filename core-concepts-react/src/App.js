@@ -9,7 +9,7 @@ function App() {
 }
 var style1={
   color:"red",
-  backgroundColor:"blue"
+  backgroundColor:"green"
 }
 
   return (
