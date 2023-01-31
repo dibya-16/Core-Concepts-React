@@ -45,6 +45,7 @@ const products=[{name:"Photoshop",price:"90$"},
         </ul>
         {
         products.map(allProducts=><Product product1={allProducts}></Product>)
+        //products.map(allProducts=><Product name={allProducts.name} price={allProducts.price}></Product>)
         }
         <Product product1={products[0]}></Product>
         <Product product1={products[1]}></Product>
