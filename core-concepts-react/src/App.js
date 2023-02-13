@@ -1,7 +1,9 @@
 import React,{useState, useEffect} from 'react';
 
-import logo from './logo.svg';
+
 import './App.css';
+import User from './User';
+
 
 function App() {
   var person1="Dibya";
@@ -19,13 +21,32 @@ const products=[{name:"Photoshop",price:"90$"},
 {name:"PDF reader",price:"60$"}
 ]
 
+ 
+const [familiar,setFamiliar]=useState(false);
+
+const [randomUser,setRandomUser]=useState({});
+useEffect(()=>{
+  fetch("https://randomuser.me/api")
+  .then(res=>res.json())
+  .then(data=>setRandomUser(data.results[0]))
+},[]);
+
+
+
+
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+       
+        
+      <div>
+        <h2>Random User Gender:{randomUser.gender}</h2>
+        <h2>Random User First Name:{randomUser.name && randomUser.name.first}</h2>
+      </div>
+
+        
         <h2 style={style1} >My name is:{" "}{ person1}</h2>
         <h2 style={{backgroundColor:"red",color:"cyan"}}>My name is: {person2.name} And Age is: {person2.age}</h2>
         
@@ -54,6 +75,12 @@ const products=[{name:"Photoshop",price:"90$"},
         <Person></Person>
         <Person2 name={names[0]} profession="Software Engineer"></Person2>
         <Person2 name={names[1]} profession="Software Engineer"></Person2>
+
+        
+        <h2>Is Familiar:{familiar.toString()}</h2>
+        <button onClick={()=>{setFamiliar(!familiar)}}>Toggle</button>
+        <User familiar={familiar}></User>
+
       </header>
       
     </div>
@@ -61,7 +88,7 @@ const products=[{name:"Photoshop",price:"90$"},
  
 }
 function Users(){
-  const [user,setUser]=useState([]);
+  const [user,setUser]=useState([]);//empty array.czz array nicchi..jodi object nitam tahole {} ditam
   useEffect(()=>{
     fetch("https://jsonplaceholder.typicode.com/users")
     .then(res=>res.json())
@@ -104,7 +131,7 @@ function Product(props){
     width:"200px",
     float:"float"
   }
-  const {name,price}= props.product1;
+  const {name}= props.product1;
   return(
     <div style={productStyle}>
       <h2>{name}</h2>
