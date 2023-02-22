@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const Login = () => {
 
     const [loggedInUser,setLoggedInUser]=useContext(userContext);
-    const history = useNavigate();
+    const history = useNavigate();//useHistory()'r jaygay useNavigate() boshbe update react-6 (react router dom ) ah
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
     const provider = new GoogleAuthProvider();
