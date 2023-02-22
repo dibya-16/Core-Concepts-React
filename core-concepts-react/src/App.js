@@ -1,9 +1,18 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, createContext} from 'react';
+import {
+  BrowserRouter as Router,
+
+  Routes,
+  Route
+} from "react-router-dom";
 
 
 import './App.css';
+import Home from './Home/Home';
+import Login from './Login/Login';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 import User from './User';
-
+export const userContext=createContext();
 
 function App() {
   var person1="Dibya";
@@ -33,11 +42,34 @@ useEffect(()=>{
 
 
 
-
+const [loggedInUser,setLoggedInUser]=useState({});
 
 
   return (
+
+
+    
     <div className="App">
+      <div>
+        <userContext.Provider value={[loggedInUser,setLoggedInUser]}>
+          <p>Name:{loggedInUser.name}</p>
+        <Router>
+           <Routes>
+           <Route path="/login" element={<Login/>}>
+              
+             
+              </Route>
+              <Route path="/home" element={<PrivateRoute>
+                <Home/>
+                </PrivateRoute>}>
+              
+              </Route>
+             
+              </Routes> 
+        </Router>
+        </userContext.Provider>
+      
+      </div>
       <header className="App-header">
        
         
